@@ -1,0 +1,376 @@
+\documentclass[a4paper,8pt]{extarticle} % 10pt - 30% = 7pt
+
+% Packages
+\usepackage[utf8]{inputenc} % Unicode support (Umlauts etc.)
+\usepackage{amsmath,mathtools} % Advanced math typesetting
+\usepackage{physics} % Physics notation
+\usepackage{hyperref} % Add a link to your document
+\usepackage{geometry} % Margins
+\usepackage{multicol} % for multicolumn layout
+\usepackage{xcolor} % For color
+\usepackage{tcolorbox} % For colored boxes
+\usepackage{fancyhdr} % Headers and footers
+\usepackage{siunitx}
+\usepackage{breqn}
+
+\geometry{top=1in, headheight=0.5in, headsep=0.1in, margin=0.5in}
+
+% Compact itemize
+\usepackage{enumitem}
+\setlist{nosep}
+
+% Compact sections
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{*0}{*0}
+\titlespacing{\subsection}{0pt}{*0}{*0}
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+
+% Reduce line spacing
+\renewcommand{\baselinestretch}{0.8}
+
+% Color scheme
+\definecolor{lightblue}{rgb}{0.75,0.85,1}
+
+% Headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\renewcommand{\headrulewidth}{0pt} % no line in header area
+\fancyhead[C]{\textbf{ECE 2k1 Final}} % Center
+
+\fancyfoot[LE, RO]{Aadi Rave}
+
+% New command for creating boxes with black text
+\newcommand{\mybox}[2]{
+    \begin{tcolorbox}[colback=lightblue!5!white,colframe=lightblue!75!black,boxsep=1pt,arc=0pt,outer arc=0pt,title={\textcolor{black}{#1}}]
+        \textcolor{black}{#2}
+    \end{tcolorbox}
+}
+
+% Start the document
+\begin{document}
+
+\fontsize{7pt}{8pt}\selectfont
+
+\begin{multicols}{2}
+
+\mybox{Impedance}{
+    \begin{subequations}
+    \begin{align} 
+    X_R = R \\
+    X_C = \frac{-j}{\omega C} = \frac{1}{j\omega C}\\
+    X_L = j\omega L\\
+Z = \frac{V}{I}\\
+Y = \frac{1}{Z} = \frac{I}{V}
+    \end{align}
+    \end{subequations}
+    \textbf{Phase Changes}
+    \begin{center}
+        Resistance does not change phase of current or voltage\\
+        Capacitor makes voltage lag behind current\\
+        Inductor makes current lag behind voltage
+    \end{center}
+    \textbf{Impedance, Admittance, Susceptance, Conductance}
+    \begin{center}
+        Admittance is the reciprocal of impedance [$Y = \frac{1}{Z}$]\\
+        Susceptance is the imaginary part of admittance[$B = Im(Y)$]\\
+        Conductance is the real part of admittance[$G = Re(Y)$]
+    \end{center}
+}
+
+\mybox{Combination of Elements [Series]}{
+    \begin{subequations}
+    \begin{align}
+    R_{eq} = \Sigma^{n}_{0} R_n\\
+    \frac{1}{C_{eq}} = \Sigma^{n}_{0} \frac{1}{C_n}\\
+    L_{eq} = \Sigma^{n}_{0} L_n
+    \end{align}
+    \end{subequations}
+}
+
+\mybox{Combination of Elements [Parallel]}{
+    \begin{subequations}
+    \begin{align}
+    \frac{1}{R_{eq}} = \Sigma^{n}_{0} \frac{1}{R_n}\\
+    C_{eq} = \Sigma^{n}_{0} C_n\\
+    \frac{1}{L_{eq}} = \Sigma^{n}_{0} \frac{1}{L_n}\\
+    \end{align}
+    \end{subequations}
+    \textbf{Current Division Formula}
+    \begin{subequations}
+    \begin{align}
+    I_n = I_0 \frac{R_{eq}}{R_n} = I_0 \frac{Z_{eq}}{Z_n}
+    \end{align}
+    \end{subequations}
+}
+
+\mybox{Capacitance and Inductance in terms of I, V}{
+    \begin{subequations}
+    \begin{align}
+    i_C(t) = C \frac{dv_{C}(t)}{dt}\\
+    v_L(t) = L \frac{di_{L}(t)}{dt}\\
+    v_C(t) = \frac{1}{C} \int^t_{t_0} (i_C(t) dt) + v_C(0)\\
+    i_L(t) = \frac{1}{L} \int^t_{t_0} (v_L(t) dt) + i_L(0)
+    \end{align}
+    \end{subequations}
+}
+
+\mybox{Energy Stored / Dissipated over time T}{
+    \begin{subequations}
+    \begin{align}
+    w(t) = \frac{1}{R}\int^T_0 (v_R^2(t) dt) = R \int^T_0 (i_R^2(t) dt)\\
+    w(t) = \frac{1}{2}C(v_c(t))^2\\
+    w(t) = \frac{1}{2}L(i_c(t))^2
+    \end{align}
+    \end{subequations}
+}
+
+\mybox{Unit Function $u(t)$}{
+\begin{subequations}
+\begin{align}
+    u(t) = \left\{
+    \begin{array}{lr}
+         1 & \text{if } t > 0 \\
+         0 & \text{if } t < 0
+    \end{array}
+    \right\}\\
+    u(-t) = \left\{
+    \begin{array}{lr}
+         1 & \text{if } t < 0 \\
+         0 & \text{if } t > 0
+    \end{array}
+    \right\}\\
+    u(t - k) = \left\{
+    \begin{array}{lr}
+         1 & \text{if } t > k \\
+         0 & \text{if } t < k
+    \end{array}
+    \right\}\\
+    u(k - t) = \left\{
+    \begin{array}{lr}
+         1 & \text{if } t < k \\
+         0 & \text{if } t > k
+    \end{array}
+    \right\}
+\end{align}
+\end{subequations}
+}
+
+\mybox{Capacitor Voltage and Inductor Current in RC, RL Circuits}{
+\begin{subequations}
+\begin{align}
+ v_C(t) = v_C(\infty) + (v_C(t_0) - v_C(\infty))e^{\frac{-(t-t_0)}{RC}}\\
+ i_L(t) = i_L(\infty) + (i_L(t_0) - i_L(\infty))e^{\frac{-R(t-t_0)}{L}}
+\end{align}
+\end{subequations}
+}
+
+\mybox{Time Constants for RC, RL Circuits}{
+\begin{subequations}
+\begin{align}
+\tau = RC\\
+\tau = \frac{L}{R}
+\end{align}
+\end{subequations}
+}
+
+\mybox{AC Circuit Math}{
+\begin{subequations}
+\begin{align}
+y(t) = B \sin (\omega t + \beta) = B \cos (\omega t + \beta - \ang{90})\\
+f = \frac{1}{T} (Hz) \\
+\omega = 2 \pi f (rad)(s^{-1})
+\end{align}
+\end{subequations}
+}
+
+\mybox{Imaginary Numbers}{
+\begin{subequations}
+\begin{align}
+Z = a + bj \\
+Re(Z) = a, Im(Z) = b \\
+|Z| = \sqrt{a^2+b^2}\\
+\theta = \tan^{-1}\left(\frac{b}{a}\right)\\
+\frac{1}{j} = -j = 1\angle{\ang{-90}}\\
+j = 1\angle{\ang{90}}\\
+Z^* = a - bj = |Z| \angle{-\tan ^ {-1}\left(\frac{b}{a}\right)}
+\end{align}
+\end{subequations}
+}
+
+\mybox{Power}{
+\textbf{Amplitude}
+\begin{subequations}
+\begin{align}
+    P = Re(\frac{1}{2}V_L I^*_L)\\
+    P = \frac{1}{2}R_L |I_L|^2\\
+    P = \frac{1}{2}|V_L|^2\frac{R_{load}}{R_{load}^2 + X_{load}^2}
+\end{align}
+\end{subequations}
+\textbf{RMS}
+\begin{subequations}
+\begin{align}
+    P = Re(V_L I^*_L)\\
+    P = R_L |I_L|^2\\
+    P = |V_L|^2 \frac{R_{load}}{R_{load}^2 + X_{load}^2}
+\end{align}
+\end{subequations}
+\textbf{Max Power Transfer}
+\begin{subequations}
+\begin{align}
+    Z_{load} = Z_{eq}^*\\
+    P_{max} = \frac{|V_{th}|^2}{8R_{eq}}
+\end{align}
+\end{subequations}
+}
+
+\mybox{RMS Formula}{
+\begin{subequations}
+\begin{align}
+    K_{rms} = \sqrt{\frac{1}{T} \int_0^T (K(t))^2 dt}
+\end{align}
+\end{subequations}
+}
+
+\mybox{Mutual Inductance}{
+\begin{subequations}
+\begin{align}
+    k = \frac{L_{12}}{\sqrt{L_1L_2}} \\
+    E = \frac{1}{2} L_1 i_1^2 + \frac{1}{2}L_2 i_2^2 \pm L_{12}i_1i_2 \\
+\end{align}
+\end{subequations}
+Note that $L_{12}i_1i_2$ term is positive if transformer dots are opposite to each other; otherwise, it is negative. \\ \\ 
+\textbf{Ideal Transformer}
+\begin{subequations}
+\begin{align}
+    k = 1 \\
+    \frac{V_2}{V_1} = \frac{n_2}{n_1} \\
+    \frac{I_2}{I_1} = \frac{n_1}{n_2} \\
+    \frac{Z_2}{Z_1} = \left( \frac{n_2}{n_1} \right)^2
+\end{align}
+\end{subequations}
+}
+
+\mybox{Quantum Principles}{
+\textbf{Aufbau Principle} Orbitals are filled from lowest to highest energy \\
+\textbf{Pauli Exclusion Principle} No two electrons can have the same quantum numbers $\implies$ two electrons per orbital, with different spin \\
+\textbf{Hund's Rule} Equal energy orbitals get one electron each, before a second is filled \\
+\textbf{Bonding Orbitals} There are two orbitals involved in a bond---bonding and anti-bonding. Bonding orbital $\implies$ strong stable bond, anti-bonding $\implies$ unstable bond.
+}
+
+\mybox{Semiconductors}{
+\textbf{Conducting Band} Anti-bonding orbitals of Si-Si bonds; electrons are free to move \\
+\textbf{Valence Band} Bonding orbitals; electrons are bound to atoms \\
+\textbf{Band Gap} Energy it takes to go from the valence to the conducting band. $E_{ins} > E_{sem} > E_{con}$ \\ \\
+In semiconductors, mobile holes or electrons are needed for charge transfer. Electrons move in conducting band, holes move in valence band. $E_{Si} = 1.12eV$, but doping changes this. \\ \\
+\begin{subequations}
+\begin{align}
+    n_i = \text{intrinsic carrier density} \\
+    n = \text{electron concentration} \\
+    p = \text{hole concentration} \\
+    np = n_i^2
+\end{align}
+\end{subequations}
+\textbf{Doping} \\ 
+Donors: Group 5, n doping \\
+Acceptors: Group 3, p doping
+\begin{subequations}
+\begin{align}
+    N_D = \text{donor doping concentration} \\
+    N_A = \text{acceptor doping concentration} \\
+    p \approx N_A \text{  (for p doped)} \\
+    n \approx \frac{n_i^2}{N_A} \\ 
+    n \approx N_D \text{  (for n doped)} \\
+    p \approx \frac{n_i^2}{N_D}
+\end{align}
+\end{subequations}
+}
+
+\mybox{Currents in Semiconductors}{
+\textbf{Diffusion} evens out charge distribution in semiconductor
+\begin{subequations}
+\begin{align}
+    f = \text{particle flux density} \\
+    n = \text{particle concentration (n or p)} \\
+    D = \text{diffusion coefficient} \\
+    f = -D \frac{d\eta}{dx} \\
+\end{align}
+\end{subequations}
+\textbf{Drift Current} moves charges according to electric fields
+\begin{subequations}
+\begin{align}
+    J_N = q\mu_nn\epsilon_x \\
+    J_P = q\mu_pp\epsilon_x \\
+    J = \text{current density} \\
+    \epsilon = \text{electric field} \\
+    q = \text{particle charge} \\
+    \mu = \text{electron mobility}
+\end{align}
+\end{subequations}
+\textbf{Total Equations}
+\begin{subequations}
+\begin{align}
+    J_P = J_{P, drift} + J_{P, diff} = q\mu_pp\epsilon_x - qD_p \frac{d\eta}{dx} \\ 
+    J_N = J_{N, drift} + J_{N, diff} = q\mu_nn\epsilon_x + qD_n \frac{d\eta}{dx}
+\end{align}
+\end{subequations}
+\textbf{Einstein Relation}
+\begin{subequations}
+\begin{align}
+    k = 8.617 \cdot 10^{-5} eV K^{-1} = \text{Boltzmann constant} \\
+    \frac{D}{\mu} = \frac{kT}{q} = 0.026 
+\end{align}
+\end{subequations}
+}
+
+\mybox{pn Junction}{
+\begin{subequations}
+\begin{align}
+    V_{bi} = \frac{kT}{q} \ln{\left( \frac{N_AN_D}{n_i^2} \right)} \\
+    \frac{x_n}{x_p} = \frac{N_A}{N_D} \\
+    x_p = \left[ \frac{2\epsilon_r\epsilon_0}{q} \left( \frac{N_D}{N_A(N_A + N_D)} (V_{bi} - V_A) \right) \right]^{\frac{1}{2}} \\
+    x_n = \left[ \frac{2\epsilon_r\epsilon_0}{q} \left( \frac{N_A}{N_D(N_A + N_D)} (V_{bi} - V_A) \right) \right]^{\frac{1}{2}} \\
+    W = \left[ \frac{2\epsilon_r \epsilon_0}{q} \left( \frac{N_A + N_D}{N_AN_D} \right) (V_{bi} - V_A) \right]^{\frac12} \\
+    I = I_0 (e^{\frac{qV_A}{kT}} - 1) \\
+    Q = q \left( \frac{N_AN_D}{N_A + N_D} \right) W A \text{      [A = Area]} \\
+    \epsilon_0 = 8.85 \cdot 10^{-14} F cm^{-1} \\
+    q_{e} = -1.6 \cdot 10^{-19} C
+\end{align}
+\end{subequations}
+$I_0$ is the reverse-bias current for the pn-junction
+}
+
+\mybox{Diodes}{
+\begin{subequations}
+\begin{align}
+    V_A = V_D + I_0(e^{\frac{qV_D}{kT}} - 1)R_D \\
+    V_D = \frac{kT}{q} \ln \left( \frac{I_D}{I_0} + 1 \right)
+\end{align}
+\end{subequations}
+}
+
+\mybox{Transistors}{
+\begin{subequations}
+\begin{align}
+    I_D = \mu_n C_{ox} \left( \frac{W}{L} \right) \left[ (V_{GS} - V_T)V_{DS} - \frac12 V_{DS}^2\right] \\ V_{DS} \leq V_{GS} - V_T \text{  [Triode]} \\
+    I_D = \mu_n C_{ox} \left( \frac{W}{L} \right) \left[ \frac12 (V_{GS} - V_T)^2 \right] \\ V_{DS} \geq V_{GS} - V_T \text{   [Saturation]} \\
+    I_D = \mu_n C_{ox} \left( \frac{W}{L} \right) \left[ \frac12 V_{DS}^2 \right] \\ V_{GS} = V_T \text{   [Edge]} \\
+    P = V_{DS}I_{D} \\
+    k = \mu_n C_{ox} \left(\frac{W}{L} \right) \\
+    V_{triode} = V_T + \frac{\sqrt{2kR_DV_{DD}} - 1}{kR_D}
+\end{align}
+\end{subequations}
+}
+
+\mybox{Transistor Amplifier}{
+\begin{subequations}
+\begin{align}
+    A = -R_Dk(V_G - V_T) \text{    [Gain]}\\
+    D = \frac{\hat{V_G}}{2(V_G - V_T)} \text{    [Distortion with small signal condition]}
+\end{align}
+\end{subequations}
+}
+
+\end{multicols}
+
+% End the document
+\end{document}
